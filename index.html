@@ -11,7 +11,6 @@ body {
 <meta property="og:type" content="website">
 <meta name="og:image" itemprop="image" content="https://i.imgur.com/fNRgiiX.png">
 <meta name="theme-color" content="#000000">
-<script type="text/javascript" src="sound-onclick.js"></script>
 </head>
 <body><center>
 	<br>
@@ -26,12 +25,20 @@ body {
 	<br>
 	<br>
 	<br>
-  <img src="https://i.imgur.com/fNRgiiX.png">
+  <img src="">
 									   
-<audio>
-<source src="https://media1.vocaroo.com/mp3/1eWaUUHieOg2" type="audio/mpeg">
-</audio>
-<div id="sounddiv"><bgsound id="sound"></div>
+<body>
+
+    <script>
+  function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
+   </script>
+
+<img src="https://i.imgur.com/fNRgiiX.png" value="PLAY"  onclick="play()">
+<audio id="audio" src="https://media1.vocaroo.com/mp3/1eWaUUHieOg2" ></audio>
+ </body>
 				      
  </body>
 					  
