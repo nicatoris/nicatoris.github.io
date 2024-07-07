@@ -52,9 +52,7 @@
 }
 
 .center-text {
-  display: table-cell; 
-  vertical-align: middle; 
-  text-align: center; 
+  margin-top: 15%;
 }
 
 h1 {
