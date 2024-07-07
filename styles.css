@@ -29,10 +29,14 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  max-height: 400px;
+  height: 400px;
 }
 
 .img{
   margin: 5px;
+  max-height: 400px;
+  width: auto;
 }
 
 .center {
