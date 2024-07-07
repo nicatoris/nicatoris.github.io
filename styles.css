@@ -19,6 +19,14 @@
   color: rgb(173, 173, 173);
 }
 
+.navbar-middle a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .navbar-right {
   float: right;
 }
