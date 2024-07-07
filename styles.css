@@ -7,7 +7,6 @@
 }
 
 .navbar a {
-  float: left;
   font-family: "Lucida Console", "Courier New", monospace;
   display: block;
   color: white;
@@ -22,6 +21,10 @@
 
 .navbar-right {
   float: right;
+}
+
+.navbar-left {
+  float: left;
 }
 
 .main {
