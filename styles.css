@@ -1,7 +1,25 @@
-@media (max-width: 979px){
- .x-navbar.x-navbar-fixed-top{
-    position: fixed;
- }    
+img {
+  cursor: pointer;
+}
+
+img:focus {
+  --offset: 150px;
+  position: fixed;
+  inset: var(--offset);
+  object-fit: cover;
+  width: calc(100dvw - 2 * var(--offset));
+  height: calc(100dvh - 2 * var(--offset));
+  box-shadow: 0 0 0 var(--offset) rgba(0, 0, 0, .6);
+  z-index: 666;
+  cursor: unset;
+}
+
+div {
+  display: inline-flex;
+}
+
+div:has(img:focus) {
+  height: 100px;
 }
 
 .navbar {
