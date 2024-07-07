@@ -8,7 +8,7 @@
 
 .navbar a {
   font-family: "Lucida Console", "Courier New", monospace;
-  display: block;
+  display: inline-block;
   color: white;
   text-align: center;
   padding: 14px 16px;
