@@ -25,11 +25,15 @@
 }
 
 .imageContainer{
-   display: flex;
-   align-items: center;
-   min-height: 100vh;
-   flex-direction: column;
-   justify-content: center;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  height: auto; 
+  width: auto; 
+  max-width: 300px; 
+  max-height: 300px;
 }
 
 .img{
