@@ -27,13 +27,9 @@
 .imageContainer{
   display: flex;
   align-items: center;
-  min-height: 100vh;
+  max-height: 25vh;
   flex-direction: column;
   justify-content: center;
-  height: auto; 
-  width: auto; 
-  max-width: 300px; 
-  max-height: 300px;
 }
 
 .img{
