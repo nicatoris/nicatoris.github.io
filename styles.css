@@ -34,8 +34,10 @@
 
 .img{
   margin: 5px;
-  width: 300px;
-  height: auto;
+  height: auto; 
+  width: auto; 
+  max-width: 300px; 
+  max-height: 300px;
 }
 
 .center {
