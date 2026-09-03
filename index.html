@@ -16,13 +16,13 @@
 
 <style>
   :root{
-  --screen:#03070F;
-  --phosphor:#3DE3FF;
-  --dim:#1B5C7C;
-  --amber:#9D7BFF;
-  --fringe-a:#FF3DA1;
-  --fringe-b:#2D5BFF;
-}
+    --screen:#03070F;
+    --phosphor:#3DE3FF;
+    --dim:#1B5C7C;
+    --amber:#9D7BFF;
+    --fringe-a:#FF3DA1;
+    --fringe-b:#2D5BFF;
+  }
 
   *{margin:0;padding:0;box-sizing:border-box}
 
@@ -84,7 +84,7 @@
   .sweep{
     position:absolute; left:0; right:0;
     height:340px;
-    background:linear-gradient(to bottom, transparent, rgba(61,255,116,.07), transparent);
+    background:linear-gradient(to bottom, transparent, rgba(61,227,255,.07), transparent);
     animation:sweep 7s linear infinite;
     z-index:7;
     pointer-events:none;
@@ -117,7 +117,7 @@
   }
   .plate.a{color:var(--fringe-a); mix-blend-mode:screen; animation:conv 4s ease-in-out infinite}
   .plate.b{color:var(--fringe-b); mix-blend-mode:screen; animation:conv 4s ease-in-out infinite reverse}
-  .plate.main{color:var(--phosphor); text-shadow:0 0 26px rgba(61,255,116,.55)}
+  .plate.main{color:var(--phosphor); text-shadow:0 0 26px rgba(61,227,255,.55)}
 
   @keyframes conv{
     0%,100%{transform:translate(6px,-3px)}
@@ -149,7 +149,7 @@
   @keyframes type{to{width:100%}}
 
   .readout .dots{color:var(--dim)}
-  .readout .val{color:#EAFFF0}
+  .readout .val{color:#EAF7FF}
 
   .games{
     margin-top:44px;
@@ -184,20 +184,30 @@
     color:var(--screen);
     display:flex; align-items:center;
     overflow:hidden;
-    white-space:nowrap;
     z-index:5;
     font-size:40px;
     letter-spacing:.06em;
   }
-  .ticker{
-    display:inline-block;
-    padding-left:100%;
-    animation:slide 24s linear infinite;
+
+  /* Two identical copies sit side by side. Sliding left by exactly one
+     copy loops seamlessly, so the bar is full from the first frame. */
+  .marquee{
+    display:flex;
+    flex:0 0 auto;
+    will-change:transform;
+    animation:slide 20s linear infinite;
   }
-  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+  .marquee span{
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+  @keyframes slide{
+    from{transform:translateX(0)}
+    to  {transform:translateX(-50%)}
+  }
 
   @media (prefers-reduced-motion:reduce){
-    #stage,.sweep,.plate,.ticker,.cursor{animation:none !important}
+    #stage,.sweep,.plate,.marquee,.cursor{animation:none !important}
     .readout .row,.games .row{width:100% !important;animation:none !important}
   }
 </style>
@@ -222,7 +232,12 @@
     <div class="cursorline"><span id="cta"></span><span class="cursor"></span></div>
   </div>
 
-  <div class="foot"><span class="ticker" id="ticker"></span></div>
+  <div class="foot">
+    <div class="marquee" id="marquee">
+      <span id="tickerA"></span>
+      <span id="tickerB"></span>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -235,24 +250,28 @@ const EVENT = {
 
   // Left label and right value. Add or delete lines freely.
   specs    : [
-    ["DATE",     "SAT SEPTEMBER 5TH / 9PM"],
-    ["INFO",  "BRING YOUR OWN PC"],
-    ["SEATS",    "LIMITED SEATS & MONITORS AVAILABLE"],
+    ["DATE",      "SAT SEPTEMBER 5TH / 9PM"],
+    ["INFO",      "BRING YOUR OWN PC"],
+    ["SEATS",     "LIMITED SEATS & MONITORS AVAILABLE"],
     ["INCLUDED",  "DRINKS PROVIDED"],
-    ["LOCATION", "FORT LAUDERDALE, FLORIDA"]
+    ["LOCATION",  "FORT LAUDERDALE, FLORIDA"]
   ],
 
   games    : ["COUNTER-STRIKE", "FIFA", "HALO", "AND MORE"],
 
   cta      : "RSVP: DM @NICATORIS FOR ADDRESS",
-  ticker   : "BRING PC, KEYBOARD, AND MOUSE • TEA AND DRINKS PROVIDED • LIMITED MONITORS AVAILABLE • 9PM - LATE"
+  ticker   : "BRING PC, KEYBOARD, AND MOUSE • TEA AND DRINKS PROVIDED • LIMITED MONITORS AVAILABLE • 9PM - LATE",
+
+  // Bottom bar scroll speed, in pixels per second.
+  // Higher is faster. 90 is slow and readable, 200 is brisk.
+  tickerSpeed: 130
 };
 /* ========================================================== */
 
 
 // --- fills the flyer with your details ---
-document.getElementById('strap').innerHTML       = EVENT.strap;
-document.getElementById('cta').textContent       = EVENT.cta;
+document.getElementById('strap').innerHTML = EVENT.strap;
+document.getElementById('cta').textContent = EVENT.cta;
 
 ['titleA','titleB','titleMain'].forEach(function(id){
   document.getElementById(id).innerHTML = EVENT.title;
@@ -273,7 +292,28 @@ document.getElementById('games').innerHTML = EVENT.games.map(function(g, i){
        + '[' + (i + 1) + '] ' + g + '</div>';
 }).join('');
 
-document.getElementById('ticker').textContent = (EVENT.ticker + ' • ').repeat(4);
+// --- bottom bar: fill the width first, then match speed to text length ---
+var marquee = document.getElementById('marquee');
+var tickerA = document.getElementById('tickerA');
+var tickerB = document.getElementById('tickerB');
+
+function buildTicker(){
+  var unit = EVENT.ticker + '  \u2022  ';
+  var reps = 1;
+  tickerA.textContent = unit;
+  // repeat the line until one copy is wider than the flyer, so the bar
+  // is never empty at any point in the loop
+  while(tickerA.offsetWidth < 1080 && reps < 30){
+    reps++;
+    tickerA.textContent = unit.repeat(reps);
+  }
+  tickerB.textContent = tickerA.textContent;
+  marquee.style.animationDuration = (tickerA.offsetWidth / EVENT.tickerSpeed) + 's';
+}
+
+buildTicker();
+// remeasure once the fonts have loaded, otherwise the widths are wrong
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(buildTicker); }
 
 // --- replays the boot sequence every 16 seconds ---
 var stage = document.getElementById('stage');
