@@ -160,17 +160,37 @@
   .games .row{white-space:nowrap;overflow:hidden;width:0}
   #stage.go .games .row{animation:type .45s steps(40,end) forwards}
 
+  /* ---- RSVP panel ---- */
   .cursorline{
-    margin-top:44px;
-    font-size:48px;
+    align-self:flex-start;
+    margin-top:52px;
+    padding:22px 30px;
+    font-size:62px;
+    line-height:1;
     color:var(--phosphor);
+    border:5px solid var(--phosphor);
+    background:rgba(61,227,255,.10);
+    text-shadow:0 0 18px rgba(61,227,255,.7);
+    opacity:0;
+  }
+  #stage.go .cursorline{
+    animation:popin .4s ease-out forwards, pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes popin{
+    from{opacity:0; transform:translateY(14px)}
+    to  {opacity:1; transform:translateY(0)}
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 26px rgba(61,227,255,.22), inset 0 0 18px rgba(61,227,255,.06)}
+    50%    {box-shadow:0 0 62px rgba(61,227,255,.60), inset 0 0 34px rgba(61,227,255,.18)}
   }
   .cursor{
     display:inline-block;
-    width:26px; height:38px;
+    width:30px; height:48px;
     background:var(--phosphor);
-    vertical-align:-4px;
-    margin-left:6px;
+    vertical-align:-6px;
+    margin-left:10px;
+    box-shadow:0 0 20px rgba(61,227,255,.8);
     animation:blink 1s steps(2) infinite;
   }
   @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
@@ -207,7 +227,8 @@
   }
 
   @media (prefers-reduced-motion:reduce){
-    #stage,.sweep,.plate,.marquee,.cursor{animation:none !important}
+    #stage,.sweep,.plate,.marquee,.cursor,.cursorline{animation:none !important}
+    .cursorline{opacity:1 !important}
     .readout .row,.games .row{width:100% !important;animation:none !important}
   }
 </style>
@@ -250,7 +271,7 @@ const EVENT = {
 
   // Left label and right value. Add or delete lines freely.
   specs    : [
-    ["DATE",      "SAT SEPTEMBER 5TH / 9PM"],
+    ["DATE",      "SATURDAY, SEPTEMBER 5TH - 9:00 PM"],
     ["INFO",      "BRING YOUR OWN PC"],
     ["SEATS",     "LIMITED SEATS & MONITORS AVAILABLE"],
     ["INCLUDED",  "DRINKS PROVIDED"],
@@ -291,6 +312,11 @@ document.getElementById('games').innerHTML = EVENT.games.map(function(g, i){
   return '<div class="row" style="animation-delay:' + (gameStart + i * 0.3) + 's">'
        + '[' + (i + 1) + '] ' + g + '</div>';
 }).join('');
+
+// makes the RSVP box land last, after the games list has finished typing
+var ctaStart = gameStart + EVENT.games.length * 0.3 + 0.35;
+document.querySelector('.cursorline').style.animationDelay =
+  ctaStart + 's, ' + (ctaStart + 0.4) + 's';
 
 // --- bottom bar: fill the width first, then match speed to text length ---
 var marquee = document.getElementById('marquee');
