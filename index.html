@@ -30,9 +30,9 @@
     transform-origin:center center;
   }
 
-  .nav{height:112px;flex:0 0 auto;background:#4C5844;display:flex;align-items:center;padding:0 40px;gap:52px;font-size:38px;font-weight:bold;letter-spacing:1px;color:#A5B99A;border-bottom:2px solid #2B2F26}
-  .nav .on{color:#FFFFFF;border-bottom:6px solid #8BC53F;padding-bottom:10px;margin-bottom:-16px}
-  .nav .me{margin-left:auto;font-weight:normal;letter-spacing:0;font-size:32px;color:#B5C4A2}
+  .nav{height:112px;flex:0 0 auto;background:#4C5844;display:flex;align-items:center;padding:0 40px;gap:52px;font-size:38px;font-weight:bold;letter-spacing:1px;border-bottom:2px solid #2B2F26}
+  .nav span{color:#A5B99A;border-bottom:6px solid transparent;padding-bottom:10px;margin-bottom:-16px;animation:tab 3.9s steps(1) infinite}
+  @keyframes tab{0%{color:#FFFFFF;border-bottom-color:#8BC53F}33.4%,100%{color:#A5B99A;border-bottom-color:transparent}}
 
   .hero{flex:0 0 auto;padding:52px 40px 48px;border-bottom:2px solid #2B2F26}
   .mark{font-family:'Arial Black',Impact,sans-serif;font-size:124px;line-height:.95;letter-spacing:-2px;color:#EDEFE2}
@@ -61,7 +61,7 @@
   @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
   @media (prefers-reduced-motion:reduce){
-    .li,.mq{animation:none !important}
+    .li,.mq,.nav span{animation:none !important}
   }
 </style>
 </head>
@@ -70,8 +70,9 @@
 <div id="stage">
 
   <div class="nav">
-    <span>STORE</span><span class="on">LIBRARY</span><span>COMMUNITY</span>
-    <span class="me">NICATORIS</span>
+    <span style="animation-delay:0s">STORE</span>
+    <span style="animation-delay:1.3s">LIBRARY</span>
+    <span style="animation-delay:2.6s">COMMUNITY</span>
   </div>
 
   <div class="hero">
@@ -88,7 +89,7 @@
     <div class="row"><b>DATE</b><span>Saturday, September 5th<br>9:00 PM</span></div>
     <div class="row"><b>INFO</b><span>Bring your own PC</span></div>
     <div class="row"><b>SEATS</b><span>Limited seats &amp; monitors available</span></div>
-    <div class="row"><b>INCLUDED</b><span>Drinks provided</span></div>
+    <div class="row"><b>INCLUDED</b><span>Drinks and tea provided</span></div>
     <div class="row"><b>LOCATION</b><span>Fort Lauderdale, Florida</span></div>
   </div>
 
