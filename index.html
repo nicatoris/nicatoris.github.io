@@ -6,123 +6,29 @@
 <title>LOCALHOST</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%}
+  html,body{height:100%;background:#000}
   body{
-    background:#3B4231;
     min-height:100dvh;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
-
-  /* fixed 1080x1920 canvas, scaled to fit the phone by the script at the bottom */
-  #stage{
-    width:1080px;
-    height:1920px;
-    flex:0 0 auto;
-    background:#3B4231;
-    font-family:Verdana,Tahoma,sans-serif;
-    color:#D5DBC8;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    transform-origin:center center;
-  }
-
-  .nav{height:112px;flex:0 0 auto;background:#4C5844;display:flex;align-items:center;padding:0 40px;gap:52px;font-size:38px;font-weight:bold;letter-spacing:1px;border-bottom:2px solid #2B2F26}
-  .nav span{color:#A5B99A;border-bottom:6px solid transparent;padding-bottom:10px;margin-bottom:-16px;animation:tab 3.9s steps(1) infinite}
-  @keyframes tab{0%{color:#FFFFFF;border-bottom-color:#8BC53F}33.4%,100%{color:#A5B99A;border-bottom-color:transparent}}
-
-  .hero{flex:0 0 auto;padding:52px 40px 48px;border-bottom:2px solid #2B2F26}
-  .mark{font-family:'Arial Black',Impact,sans-serif;font-size:124px;line-height:.95;letter-spacing:-2px;color:#EDEFE2}
-  .sub{font-size:38px;color:#C9D3B8;margin-top:20px}
-  .act{display:flex;align-items:center;gap:30px;margin-top:38px}
-  .play{flex:0 0 auto;display:inline-block;text-decoration:none;font-size:46px;font-weight:bold;color:#FFFFFF;text-shadow:1px 1px 0 #2E3B06;padding:24px 70px;background:linear-gradient(#A4D007,#536C13);border:2px solid #2E3B06;-webkit-tap-highlight-color:transparent}
-  .play:active{background:linear-gradient(#536C13,#A4D007)}
-  .acts{font-size:32px;color:#C9D3B8;line-height:1.4;text-decoration:none}
-
-  .sh{flex:0 0 auto;padding:22px 40px;font-size:30px;letter-spacing:2px;color:#FFFFFF;background:#3E4637;border-bottom:2px solid #2B2F26}
-
-  .det{flex:0 0 auto;padding:0 40px}
-  .row{display:flex;align-items:baseline;gap:20px;padding:24px 0;border-bottom:1px solid #4C5844}
-  .row:last-child{border-bottom:none}
-  .row b{font-weight:normal;color:#B5C4A2;width:220px;flex:0 0 auto;font-size:30px;letter-spacing:2px}
-  .row span{flex:1;min-width:0;color:#EDEFE2;font-size:38px;line-height:1.35}
-
-  .games{flex:1 0 auto;padding:8px 0;border-top:2px solid #2B2F26}
-  .li{display:flex;align-items:center;gap:18px;padding:20px 40px;font-size:36px;color:#D5DBC8;animation:sel 5.2s steps(1) infinite}
-  @keyframes sel{0%{background:#5C6A4E;color:#FFFFFF}23%,100%{background:transparent;color:#D5DBC8}}
-  .ic{width:34px;height:34px;background:#6C7B5B;flex:0 0 auto}
-
-  .foot{height:90px;flex:0 0 auto;background:#3E4637;border-top:2px solid #2B2F26;display:flex;align-items:center;overflow:hidden;font-size:32px;color:#C9D3B8}
-  .mq{display:flex;flex:0 0 auto;animation:slide 26s linear infinite}
-  .mq span{flex:0 0 auto;white-space:nowrap;padding-right:70px}
-  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-  @media (prefers-reduced-motion:reduce){
-    .li,.mq,.nav span{animation:none !important}
+  img{
+    display:block;
+    max-width:94vw;
+    max-height:94dvh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
   }
 </style>
 </head>
 <body>
 
-<div id="stage">
-
-  <div class="nav">
-    <span style="animation-delay:0s">STORE</span>
-    <span style="animation-delay:1.3s">LIBRARY</span>
-    <span style="animation-delay:2.6s">COMMUNITY</span>
-  </div>
-
-  <div class="hero">
-    <div class="mark">LOCAL<br>HOST</div>
-    <div class="sub">at TorisCorp Headquarters</div>
-    <div class="act">
-      <a class="play" href="https://www.instagram.com/nicatoris/" target="_blank" rel="noopener">RSVP</a>
-      <a class="acts" href="https://www.instagram.com/nicatoris/" target="_blank" rel="noopener">DM @NICATORIS<br>for address</a>
-    </div>
-  </div>
-
-  <div class="sh">DETAILS</div>
-  <div class="det">
-    <div class="row"><b>DATE</b><span>Saturday, September 5th<br>9:00 PM</span></div>
-    <div class="row"><b>INFO</b><span>Bring your own PC</span></div>
-    <div class="row"><b>SEATS</b><span>Limited seats &amp; monitors available</span></div>
-    <div class="row"><b>INCLUDED</b><span>Drinks and tea provided</span></div>
-    <div class="row"><b>LOCATION</b><span>Fort Lauderdale, Florida</span></div>
-  </div>
-
-  <div class="sh">GAMES</div>
-  <div class="games">
-    <div class="li" style="animation-delay:0s"><span class="ic"></span>Counter-Strike</div>
-    <div class="li" style="animation-delay:1.3s"><span class="ic"></span>FIFA</div>
-    <div class="li" style="animation-delay:2.6s"><span class="ic"></span>Halo</div>
-    <div class="li" style="animation-delay:3.9s"><span class="ic"></span>and more</div>
-  </div>
-
-  <div class="foot">
-    <div class="mq">
-      <span>BRING PC, KEYBOARD, AND MOUSE • TEA AND DRINKS PROVIDED • LIMITED MONITORS AVAILABLE • 9PM - LATE</span>
-      <span>BRING PC, KEYBOARD, AND MOUSE • TEA AND DRINKS PROVIDED • LIMITED MONITORS AVAILABLE • 9PM - LATE</span>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  // scales the 1080x1920 canvas to fit whatever screen opens it
-  var stage = document.getElementById('stage');
-  function fit(){
-    var w = window.innerWidth, h = window.innerHeight;
-    var scale = Math.min(w / 1080, h / 1920);
-    stage.style.transform = 'scale(' + scale + ')';
-    stage.style.margin = (1920 * scale - 1920) / 2 + 'px ' + (1080 * scale - 1080) / 2 + 'px';
-  }
-  fit();
-  window.addEventListener('resize', fit);
-  window.addEventListener('orientationchange', fit);
-</script>
+  <!-- replace image.jpg with your image's file name or URL -->
+  <img src="toriscorp2005.jpg" alt="">
 
 </body>
 </html>
